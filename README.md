@@ -1,2 +1,27 @@
-# paymentpage-sdk-android-core
-Sample integration for core module
+# Quickstart
+
+**How to use example project**
+1. Open your application (`androidApp`) module (`build.gradle.kts`);
+2. Set `projectId` and `projectSalt` variables
+3. Run sync gradle task
+
+
+**Importing libraries in your project**
+
+The SDK for Android libraries can be imported via MavenCentral. To import the libraries via
+MavenCentral, you need to do the following:
+
+1. Open your application (`androidApp`)  module  (`build.gradle.kts`);
+2. In the `repositories {}` section, specify the `mavenCentral` repository:
+```
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+```
+3. In the `dependencies {}` section, add the following dependencies:
+```
+implementation "com.ecommpay:msdk-core-android:LATEST_VERSION"
+```

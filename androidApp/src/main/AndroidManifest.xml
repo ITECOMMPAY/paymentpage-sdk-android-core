@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.ecommpay.msdk.test.android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+
+    <application
+        android:label="MSDK Core Test"
+        android:name="com.ecommpay.msdk.test.android.App"
+        android:allowBackup="false"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:targetApi="s">
+
+        <meta-data
+            android:name="com.google.android.gms.wallet.api.enabled"
+            android:value="true" />
+
+        <activity
+            android:name="com.ecommpay.msdk.test.android.card.SavedCardSaleActivity"
+            android:exported="false" />
+
+        <activity
+            android:name="com.ecommpay.msdk.test.android.payment.PaymentRestoreActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.ecommpay.msdk.test.android.card.CardSaleActivity"
+            android:exported="false" />
+
+        <activity
+            android:name="com.ecommpay.msdk.test.android.account.remove.AccountRemoveActivity"
+            android:exported="false" />
+
+        <activity
+            android:name="com.ecommpay.msdk.test.android.gpay.GPaySaleActivity"
+            android:exported="false" />
+
+        <activity
+            android:name="com.ecommpay.msdk.test.android.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

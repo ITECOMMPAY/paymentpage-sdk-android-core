@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <Button
+        android:id="@+id/paymentRestore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:onClick="paymentRestore"
+        android:text="Payment Received" />
+
+    <Button
+        android:id="@+id/removeSavedCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:onClick="removeSavedCard"
+        android:text="Remove Saved Card" />
+
+
+    <Button
+        android:id="@+id/newCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:onClick="newCard"
+        android:text="New Card Sale/Auth/Tokenize/Verify" />
+
+    <Button
+        android:id="@+id/savedCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:onClick="savedCard"
+        android:text="Saved Card Sale/Auth" />
+
+    <Button
+        android:id="@+id/gPaySale"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:onClick="gPaySale"
+        android:text="Google Pay Sale/Auth" />
+
+</LinearLayout>

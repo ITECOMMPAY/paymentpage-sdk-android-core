@@ -1,0 +1,29 @@
+{
+  "apiVersion": 2,
+  "apiVersionMinor": 0,
+  "merchantInfo": {
+    "merchantName": "Example Merchant",
+    "merchantId": "BCR2DN6TZ75OBLTH"
+  },
+  "allowedPaymentMethods": [
+    {
+      "type": "CARD",
+      "parameters": {
+        "allowedAuthMethods": ["PAN_ONLY", "CRYPTOGRAM_3DS"],
+        "allowedCardNetworks": ["AMEX", "DISCOVER", "INTERAC", "JCB", "MASTERCARD", "VISA"]
+      },
+      "tokenizationSpecification": {
+        "type": "PAYMENT_GATEWAY",
+        "parameters": {
+          "gateway": "ecommpay",
+          "gatewayMerchantId": "BCR2DN6TZ75OBLTH"
+        }
+      }
+    }
+  ],
+  "transactionInfo": {
+    "totalPriceStatus": "FINAL",
+    "totalPrice": "12.34",
+    "currencyCode": "USD"
+  }
+}
