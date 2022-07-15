@@ -1,14 +1,14 @@
-package com.ecommpay.msdk.test.android.account.remove
+package com.paymentpage.msdk.core.android.account.remove
 
 import android.app.ProgressDialog
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.ecommpay.msdk.core.base.ErrorCode
-import com.ecommpay.msdk.core.domain.interactors.card.remove.CardRemoveDelegate
-import com.ecommpay.msdk.core.domain.interactors.card.remove.CardRemoveRequest
-import com.ecommpay.msdk.test.android.App
-import com.ecommpay.msdk.test.android.R
+import com.paymentpage.msdk.core.android.App
+import com.paymentpage.msdk.core.android.R
+import com.paymentpage.msdk.core.base.ErrorCode
+import com.paymentpage.msdk.core.domain.interactors.card.remove.CardRemoveDelegate
+import com.paymentpage.msdk.core.domain.interactors.card.remove.CardRemoveRequest
 
 class AccountRemoveActivity : AppCompatActivity(), CardRemoveDelegate {
 

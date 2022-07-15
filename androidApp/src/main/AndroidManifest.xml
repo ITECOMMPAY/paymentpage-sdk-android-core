@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.ecommpay.msdk.test.android">
+    package="com.paymentpage.msdk.core.android">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -9,7 +9,7 @@
 
     <application
         android:label="MSDK Core Test"
-        android:name="com.ecommpay.msdk.test.android.App"
+        android:name=".App"
         android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:supportsRtl="true"
@@ -21,26 +21,26 @@
             android:value="true" />
 
         <activity
-            android:name="com.ecommpay.msdk.test.android.card.SavedCardSaleActivity"
+            android:name=".card.SavedCardSaleActivity"
             android:exported="false" />
 
         <activity
-            android:name="com.ecommpay.msdk.test.android.payment.PaymentRestoreActivity"
+            android:name=".payment.PaymentRestoreActivity"
             android:exported="false" />
         <activity
-            android:name="com.ecommpay.msdk.test.android.card.CardSaleActivity"
-            android:exported="false" />
-
-        <activity
-            android:name="com.ecommpay.msdk.test.android.account.remove.AccountRemoveActivity"
+            android:name=".card.CardSaleActivity"
             android:exported="false" />
 
         <activity
-            android:name="com.ecommpay.msdk.test.android.gpay.GPaySaleActivity"
+            android:name=".account.remove.AccountRemoveActivity"
             android:exported="false" />
 
         <activity
-            android:name="com.ecommpay.msdk.test.android.MainActivity"
+            android:name=".gpay.GPaySaleActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

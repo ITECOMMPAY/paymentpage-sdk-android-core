@@ -1,8 +1,5 @@
-package com.ecommpay.msdk.test.android
+package com.paymentpage.msdk.core.android
 
-import com.ecommpay.msdk.core.domain.entities.clarification.ClarificationField
-import com.ecommpay.msdk.core.domain.entities.customer.CustomerField
-import com.ecommpay.msdk.core.domain.entities.customer.CustomerFieldType
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.util.*

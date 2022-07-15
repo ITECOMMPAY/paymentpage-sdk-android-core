@@ -1,19 +1,19 @@
-package com.ecommpay.msdk.test.android.gpay
+package com.paymentpage.msdk.core.android.gpay
 
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import com.ecommpay.msdk.core.domain.interactors.pay.googlePay.GooglePayEnvironment
-import com.ecommpay.msdk.core.domain.interactors.pay.googlePay.GooglePaySaleRequest
-import com.ecommpay.msdk.core.googlePay.GooglePayHelper
-import com.ecommpay.msdk.test.android.App
-import com.ecommpay.msdk.test.android.BuildConfig
-import com.ecommpay.msdk.test.android.PayBaseActivity
-import com.ecommpay.msdk.test.android.R
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.wallet.*
+import com.paymentpage.msdk.core.android.BuildConfig
+import com.paymentpage.msdk.core.android.R
+import com.paymentpage.msdk.core.domain.interactors.pay.googlePay.GooglePayEnvironment
+import com.paymentpage.msdk.core.domain.interactors.pay.googlePay.GooglePaySaleRequest
+import com.paymentpage.msdk.core.googlePay.GooglePayHelper
+import com.paymentpage.msdk.core.android.App
+import com.paymentpage.msdk.core.android.PayBaseActivity
 import org.json.JSONObject
 import java.math.BigDecimal
 
@@ -89,10 +89,6 @@ class GPaySaleActivity : PayBaseActivity() {
         val token = paymentMethodData.getJSONObject("tokenizationData").getString("token")
 
         progressDialog.show()
-
-        //GooglePaySaleRequest - sale with GooglePay
-        //GooglePayAuthRequest - auth with GooglePay
-
         interactor.execute(
             GooglePaySaleRequest(
                 merchantId = BuildConfig.GPAY_MERCHANT_ID,

@@ -1,4 +1,4 @@
-package com.ecommpay.msdk.test.android.acs
+package com.paymentpage.msdk.core.android.acs
 
 import android.graphics.Bitmap
 import android.net.http.SslError
@@ -10,9 +10,9 @@ import android.webkit.SslErrorHandler
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
-import com.ecommpay.msdk.core.domain.entities.threeDSecure.AcsPage
-import com.ecommpay.msdk.test.android.R
 import com.google.gson.Gson
+import com.paymentpage.msdk.core.android.R
+import com.paymentpage.msdk.core.domain.entities.threeDSecure.AcsPage
 
 
 private const val ARG_ACS_PAGE = "acs_page"

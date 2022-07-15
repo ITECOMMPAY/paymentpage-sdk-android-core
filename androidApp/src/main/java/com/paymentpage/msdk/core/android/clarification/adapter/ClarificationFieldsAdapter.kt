@@ -1,6 +1,6 @@
 @file:Suppress("UnnecessaryVariable", "RemoveSingleExpressionStringTemplate")
 
-package com.ecommpay.msdk.test.android.customer.adapter
+package com.paymentpage.msdk.core.android.clarification.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -10,15 +10,16 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
-import com.ecommpay.msdk.core.domain.entities.customer.CustomerField
-import com.ecommpay.msdk.core.domain.entities.customer.CustomerFieldValue
-import com.ecommpay.msdk.test.android.R
+import com.paymentpage.msdk.core.android.R
+import com.paymentpage.msdk.core.domain.entities.clarification.ClarificationField
+import com.paymentpage.msdk.core.domain.entities.clarification.ClarificationFieldValue
+import com.paymentpage.msdk.core.domain.entities.field.FieldType
 
 
-class CustomerFieldsAdapter(private val customerFields: List<CustomerField>) :
-    RecyclerView.Adapter<CustomerFieldsAdapter.ViewHolder>() {
+class ClarificationFieldsAdapter(private val clarificationFields: List<ClarificationField>) :
+    RecyclerView.Adapter<ClarificationFieldsAdapter.ViewHolder>() {
 
-    private val customerFieldsValues = mutableMapOf<String, String?>()
+    private val clarificationFieldValues = mutableMapOf<FieldType, String?>()
 
     class ViewHolder internal constructor(view: View) : RecyclerView.ViewHolder(view) {
         val title: TextView = view.findViewById(R.id.title)
@@ -36,26 +37,27 @@ class CustomerFieldsAdapter(private val customerFields: List<CustomerField>) :
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val field = customerFields[position]
+        val field = clarificationFields[position]
 
-        holder.title.text = field.label + "${if (field.isRequired) " [required]" else ""}"
-        holder.value.hint = field.hint
+        holder.title.text = field.defaultLabel ?: field.serverName
+        holder.value.hint = field.defaultHint
 
         holder.value.addTextChangedListener {
             val value = it.toString()
             if (field.validator?.isValid(value) != false) {
-                customerFieldsValues[field.serverName] = value
+                clarificationFieldValues[field.type] = value
             } else {
-                holder.value.error = field.errorMessage ?: "Invalid value"
+                holder.value.error = field.defaultErrorMessage ?: "Invalid value"
             }
 
         }
     }
 
-    override fun getItemCount() = customerFields.size
+    override fun getItemCount() = clarificationFields.size
 
     fun getFields() =
-        customerFieldsValues
+        clarificationFieldValues
             .filterValues { !it.isNullOrEmpty() }
-            .map { CustomerFieldValue.fromNameWithValue(it.key, it.value!!) }.toList()
+            .map { ClarificationFieldValue.fromTypeWithValue(it.key, it.value!!) }
+            .toList()
 }

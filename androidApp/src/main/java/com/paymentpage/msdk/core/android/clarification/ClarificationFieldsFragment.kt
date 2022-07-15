@@ -1,4 +1,4 @@
-package com.ecommpay.msdk.test.android.clarification
+package com.paymentpage.msdk.core.android.clarification
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import com.ecommpay.msdk.core.domain.entities.clarification.ClarificationField
-import com.ecommpay.msdk.core.domain.entities.clarification.ClarificationFieldValue
-import com.ecommpay.msdk.test.android.R
-import com.ecommpay.msdk.test.android.clarification.adapter.ClarificationFieldsAdapter
+import com.paymentpage.msdk.core.android.R
+import com.paymentpage.msdk.core.domain.entities.clarification.ClarificationField
+import com.paymentpage.msdk.core.domain.entities.clarification.ClarificationFieldValue
+import com.paymentpage.msdk.core.android.clarification.adapter.ClarificationFieldsAdapter
 
 
 class ClarificationFieldsFragment : Fragment() {
@@ -38,7 +38,6 @@ class ClarificationFieldsFragment : Fragment() {
         adapter = ClarificationFieldsAdapter(clarificationFields)
         recyclerView.adapter = adapter
     }
-
 
     companion object {
         @JvmStatic

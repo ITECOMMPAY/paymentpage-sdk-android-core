@@ -1,4 +1,4 @@
-package com.ecommpay.msdk.test.android;
+package com.paymentpage.msdk.core.android;
 
 import android.util.Base64
 import javax.crypto.Mac

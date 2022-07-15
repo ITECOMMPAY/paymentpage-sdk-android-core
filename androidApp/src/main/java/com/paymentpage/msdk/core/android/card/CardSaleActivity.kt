@@ -1,9 +1,10 @@
-package com.ecommpay.msdk.test.android.card
+package com.paymentpage.msdk.core.android.card
 
 import android.os.Bundle
-import com.ecommpay.msdk.core.domain.interactors.pay.card.sale.NewCardSaleRequest
-import com.ecommpay.msdk.test.android.PayBaseActivity
-import com.ecommpay.msdk.test.android.R
+import com.paymentpage.msdk.core.android.R
+import com.paymentpage.msdk.core.domain.interactors.pay.card.sale.NewCardSaleRequest
+import com.paymentpage.msdk.core.android.PayBaseActivity
+
 
 class CardSaleActivity : PayBaseActivity() {
 

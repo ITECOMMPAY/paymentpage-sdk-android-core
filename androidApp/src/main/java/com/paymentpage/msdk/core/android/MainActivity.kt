@@ -1,4 +1,4 @@
-package com.ecommpay.msdk.test.android
+package com.paymentpage.msdk.core.android
 
 import android.app.ProgressDialog
 import android.content.Intent
@@ -7,19 +7,19 @@ import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.ecommpay.msdk.core.base.ErrorCode
-import com.ecommpay.msdk.core.domain.entities.PaymentInfo
-import com.ecommpay.msdk.core.domain.entities.init.PaymentMethod
-import com.ecommpay.msdk.core.domain.entities.init.SavedAccount
-import com.ecommpay.msdk.core.domain.entities.payment.Payment
-import com.ecommpay.msdk.core.domain.interactors.init.InitDelegate
-import com.ecommpay.msdk.core.domain.interactors.init.InitInteractor
-import com.ecommpay.msdk.core.domain.interactors.init.InitRequest
-import com.ecommpay.msdk.test.android.account.remove.AccountRemoveActivity
-import com.ecommpay.msdk.test.android.card.CardSaleActivity
-import com.ecommpay.msdk.test.android.card.SavedCardSaleActivity
-import com.ecommpay.msdk.test.android.gpay.GPaySaleActivity
-import com.ecommpay.msdk.test.android.payment.PaymentRestoreActivity
+import com.paymentpage.msdk.core.base.ErrorCode
+import com.paymentpage.msdk.core.domain.entities.PaymentInfo
+import com.paymentpage.msdk.core.domain.entities.init.PaymentMethod
+import com.paymentpage.msdk.core.domain.entities.init.SavedAccount
+import com.paymentpage.msdk.core.domain.entities.payment.Payment
+import com.paymentpage.msdk.core.domain.interactors.init.InitDelegate
+import com.paymentpage.msdk.core.domain.interactors.init.InitInteractor
+import com.paymentpage.msdk.core.domain.interactors.init.InitRequest
+import com.paymentpage.msdk.core.android.account.remove.AccountRemoveActivity
+import com.paymentpage.msdk.core.android.card.CardSaleActivity
+import com.paymentpage.msdk.core.android.card.SavedCardSaleActivity
+import com.paymentpage.msdk.core.android.gpay.GPaySaleActivity
+import com.paymentpage.msdk.core.android.payment.PaymentRestoreActivity
 
 class MainActivity : AppCompatActivity(), InitDelegate {
 
@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity(), InitDelegate {
         //get string resource manager for server side strings
         val stringResourceManager = App.getMsdkSession().getStringResourceManager()
         //for example get methods list title string override
-        val title = stringResourceManager.payment.methodsTitle
+        val title = stringResourceManager.getStringByKey("title_payment_methods")
 
         //get icons resource manager
         val setSecureLogoResourceManager = App.getMsdkSession().getSecureLogoResourceManager()
@@ -138,4 +138,5 @@ class MainActivity : AppCompatActivity(), InitDelegate {
         finish()
         startActivity(Intent(this, PaymentRestoreActivity::class.java))
     }
+
 }

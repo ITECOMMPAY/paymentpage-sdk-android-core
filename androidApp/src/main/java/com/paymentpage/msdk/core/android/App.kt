@@ -1,14 +1,14 @@
-package com.ecommpay.msdk.test.android
+package com.paymentpage.msdk.core.android
 
 import android.app.Application
-import com.ecommpay.msdk.core.MSDKCoreSession
-import com.ecommpay.msdk.core.MSDKCoreSessionConfig
+import com.paymentpage.msdk.core.MSDKCoreSession
+import com.paymentpage.msdk.core.MSDKCoreSessionConfig
 
 
 class App : Application() {
-    private val config = MSDKCoreSessionConfig.prodWithDebug()
+    private val config = MSDKCoreSessionConfig.debug("sdk.ecommpay.com", "paymentpage.ecommpay.com")
     //for mocking requests
-    //private val config = MSDKCoreSessionConfig.mock(MSDKCoreMockConfig.initWithSuccessPayment())
+    //private val config = MSDKCoreSessionConfig.mockFullSuccessFlow()
 
     companion object {
         private var msdkSession: MSDKCoreSession? = null

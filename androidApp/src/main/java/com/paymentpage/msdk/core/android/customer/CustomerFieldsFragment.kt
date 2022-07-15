@@ -1,4 +1,4 @@
-package com.ecommpay.msdk.test.android.customer
+package com.paymentpage.msdk.core.android.customer
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import com.ecommpay.msdk.core.domain.entities.customer.CustomerField
-import com.ecommpay.msdk.core.domain.entities.customer.CustomerFieldValue
-import com.ecommpay.msdk.test.android.R
-import com.ecommpay.msdk.test.android.customer.adapter.CustomerFieldsAdapter
+import com.paymentpage.msdk.core.android.R
+import com.paymentpage.msdk.core.domain.entities.customer.CustomerField
+import com.paymentpage.msdk.core.domain.entities.customer.CustomerFieldValue
+import com.paymentpage.msdk.core.android.customer.adapter.CustomerFieldsAdapter
 
 
 class CustomerFieldFragment : Fragment() {
