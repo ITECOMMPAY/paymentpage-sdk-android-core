@@ -2,7 +2,7 @@
 
 **How to use example project**
 1. Open your application (`androidApp`) module (`build.gradle.kts`);
-2. Set `projectId` and `projectSalt` variables
+2. Set `projectId` and `projectSecretKey` variables
 3. Run sync gradle task
 
 
