@@ -4,6 +4,9 @@ import android.app.ProgressDialog
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.paymentpage.msdk.core.android.acs.AcsPageFragment
+import com.paymentpage.msdk.core.android.clarification.ClarificationFieldsFragment
+import com.paymentpage.msdk.core.android.customer.CustomerFieldFragment
 import com.paymentpage.msdk.core.base.ErrorCode
 import com.paymentpage.msdk.core.domain.entities.clarification.ClarificationField
 import com.paymentpage.msdk.core.domain.entities.customer.CustomerField
@@ -11,9 +14,6 @@ import com.paymentpage.msdk.core.domain.entities.payment.Payment
 import com.paymentpage.msdk.core.domain.entities.payment.PaymentStatus
 import com.paymentpage.msdk.core.domain.entities.threeDSecure.AcsPage
 import com.paymentpage.msdk.core.domain.interactors.pay.PayDelegate
-import com.paymentpage.msdk.core.android.acs.AcsPageFragment
-import com.paymentpage.msdk.core.android.clarification.ClarificationFieldsFragment
-import com.paymentpage.msdk.core.android.customer.CustomerFieldFragment
 
 abstract class PayBaseActivity : AppCompatActivity(), PayDelegate {
 
@@ -56,6 +56,12 @@ abstract class PayBaseActivity : AppCompatActivity(), PayDelegate {
 
     //need handle and send customer fields
     override fun onCustomerFields(customFields: List<CustomerField>) {
+        val fields = customFields.filter { !it.isHidden }
+
+        if (fields.isEmpty()) {
+            interactor.sendCustomerFields(emptyList())
+            return
+        }
 
         progressDialog.dismiss()
         val fragment = CustomerFieldFragment.newInstance(callback = {
@@ -67,7 +73,7 @@ abstract class PayBaseActivity : AppCompatActivity(), PayDelegate {
             .commit()
         supportFragmentManager.executePendingTransactions()
 
-        fragment.setCustomFields(customFields)
+        fragment.setCustomFields(fields)
 
     }
 
@@ -76,6 +82,9 @@ abstract class PayBaseActivity : AppCompatActivity(), PayDelegate {
         clarificationFields: List<ClarificationField>,
         payment: Payment
     ) {
+        if (clarificationFields.isEmpty())
+            return
+
         progressDialog.dismiss()
 
         val fragment = ClarificationFieldsFragment.newInstance(callback = {
@@ -102,13 +111,13 @@ abstract class PayBaseActivity : AppCompatActivity(), PayDelegate {
             .show()
     }
 
-    override fun onCompleteWithFail(status: String?, payment: Payment) {
+    override fun onCompleteWithFail(isTryAgain: Boolean, paymentMessage: String?, payment: Payment) {
         progressDialog.dismiss()
         Toast.makeText(applicationContext, "Payment completed with error", Toast.LENGTH_SHORT)
             .show()
     }
 
-    override fun onCompleteWithDecline(payment: Payment) {
+    override fun onCompleteWithDecline(paymentMessage: String?, payment: Payment) {
         progressDialog.dismiss()
         Toast.makeText(applicationContext, "Payment was declined", Toast.LENGTH_SHORT).show()
     }

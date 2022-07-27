@@ -35,7 +35,7 @@ class CustomerFieldFragment : Fragment() {
     }
 
     fun setCustomFields(customerFields: List<CustomerField>) {
-        adapter = CustomerFieldsAdapter(customerFields.filter { !it.isHidden })
+        adapter = CustomerFieldsAdapter(customerFields)
         recyclerView.adapter = adapter
     }
 

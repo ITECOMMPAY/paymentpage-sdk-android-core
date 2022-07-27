@@ -19,7 +19,7 @@ import com.paymentpage.msdk.core.domain.entities.field.FieldType
 class ClarificationFieldsAdapter(private val clarificationFields: List<ClarificationField>) :
     RecyclerView.Adapter<ClarificationFieldsAdapter.ViewHolder>() {
 
-    private val clarificationFieldValues = mutableMapOf<FieldType, String?>()
+    private val clarificationFieldValues = mutableMapOf<String, String?>()
 
     class ViewHolder internal constructor(view: View) : RecyclerView.ViewHolder(view) {
         val title: TextView = view.findViewById(R.id.title)
@@ -39,13 +39,13 @@ class ClarificationFieldsAdapter(private val clarificationFields: List<Clarifica
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val field = clarificationFields[position]
 
-        holder.title.text = field.defaultLabel ?: field.serverName
+        holder.title.text = field.defaultLabel ?: field.name
         holder.value.hint = field.defaultHint
 
         holder.value.addTextChangedListener {
             val value = it.toString()
             if (field.validator?.isValid(value) != false) {
-                clarificationFieldValues[field.type] = value
+                clarificationFieldValues[field.name] = value
             } else {
                 holder.value.error = field.defaultErrorMessage ?: "Invalid value"
             }
@@ -58,6 +58,6 @@ class ClarificationFieldsAdapter(private val clarificationFields: List<Clarifica
     fun getFields() =
         clarificationFieldValues
             .filterValues { !it.isNullOrEmpty() }
-            .map { ClarificationFieldValue.fromTypeWithValue(it.key, it.value!!) }
+            .map { ClarificationFieldValue.fromNameWithValue(it.key, it.value!!) }
             .toList()
 }

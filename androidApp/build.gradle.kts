@@ -3,8 +3,8 @@ plugins {
     kotlin("android")
 }
 
-val projectId = "PROJECT_ID"
-val projectSalt = "PROJECT_SALT"
+val projectId = "123"
+val projectSecretKey = "321"
 val gPayMerchantId = "BCR2DN6TZ75OBLTH"
 
 android {
@@ -20,8 +20,8 @@ android {
         getByName("debug") {
             buildConfigField(
                 "String",
-                "PROJECT_SALT",
-                "\"" + projectSalt + "\""
+                "PROJECT_SECRET_KEY",
+                "\"" + projectSecretKey + "\""
             )
 
             buildConfigField(
@@ -40,7 +40,7 @@ android {
 }
 
 dependencies {
-    implementation("com.ecommpay:msdk-core-android:0.2.0")
+    implementation("com.ecommpay:msdk-core-android:0.3.0")
 
     implementation("androidx.startup:startup-runtime:1.1.1")
 

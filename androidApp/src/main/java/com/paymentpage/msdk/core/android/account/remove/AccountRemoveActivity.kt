@@ -4,11 +4,11 @@ import android.app.ProgressDialog
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.paymentpage.msdk.core.android.App
 import com.paymentpage.msdk.core.android.R
 import com.paymentpage.msdk.core.base.ErrorCode
 import com.paymentpage.msdk.core.domain.interactors.card.remove.CardRemoveDelegate
 import com.paymentpage.msdk.core.domain.interactors.card.remove.CardRemoveRequest
+import com.paymentpage.msdk.core.android.App
 
 class AccountRemoveActivity : AppCompatActivity(), CardRemoveDelegate {
 

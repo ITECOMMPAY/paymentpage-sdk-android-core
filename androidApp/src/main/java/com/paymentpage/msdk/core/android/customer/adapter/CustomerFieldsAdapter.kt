@@ -13,13 +13,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.paymentpage.msdk.core.android.R
 import com.paymentpage.msdk.core.domain.entities.customer.CustomerField
 import com.paymentpage.msdk.core.domain.entities.customer.CustomerFieldValue
-import com.paymentpage.msdk.core.domain.entities.field.FieldType
 
 
 class CustomerFieldsAdapter(private val customerFields: List<CustomerField>) :
     RecyclerView.Adapter<CustomerFieldsAdapter.ViewHolder>() {
 
-    private val customerFieldsValues = mutableMapOf<FieldType, String?>()
+    private val customerFieldsValues = mutableMapOf<String, String?>()
 
     class ViewHolder internal constructor(view: View) : RecyclerView.ViewHolder(view) {
         val title: TextView = view.findViewById(R.id.title)
@@ -45,7 +44,7 @@ class CustomerFieldsAdapter(private val customerFields: List<CustomerField>) :
         holder.value.addTextChangedListener {
             val value = it.toString()
             if (field.validator?.isValid(value) != false) {
-                customerFieldsValues[field.type] = value
+                customerFieldsValues[field.name] = value
             } else {
                 holder.value.error = field.errorMessage ?: "Invalid value"
             }
@@ -58,5 +57,5 @@ class CustomerFieldsAdapter(private val customerFields: List<CustomerField>) :
     fun getFields() =
         customerFieldsValues
             .filterValues { !it.isNullOrEmpty() }
-            .map { CustomerFieldValue.fromTypeWithValue(it.key, it.value!!) }.toList()
+            .map { CustomerFieldValue.fromNameWithValue(it.key, it.value!!) }.toList()
 }

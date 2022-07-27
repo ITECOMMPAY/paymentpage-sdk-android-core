@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity(), InitDelegate {
         paymentInfo.signature =
             SignatureGenerator.generateSignature(
                 paymentInfo.getParamsForSignature(),
-                BuildConfig.PROJECT_SALT
+                BuildConfig.PROJECT_SECRET_KEY
             )
 
         //payment init
