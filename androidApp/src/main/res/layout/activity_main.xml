@@ -45,6 +45,14 @@
         android:layout_height="wrap_content"
         android:enabled="false"
         android:onClick="gPaySale"
-        android:text="Google Pay Sale/Auth" />
+        android:text="Google Pay Sale" />
+
+    <Button
+        android:id="@+id/aps"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:onClick="aps"
+        android:text="APS Sale" />
 
 </LinearLayout>

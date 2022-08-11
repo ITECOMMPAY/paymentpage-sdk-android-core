@@ -6,15 +6,17 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-
     <application
-        android:label="MSDK Core Test"
         android:name=".App"
         android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
+        android:label="MSDK Core Test"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="s">
+        <activity
+            android:name=".aps.ApsActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.gms.wallet.api.enabled"
@@ -23,22 +25,18 @@
         <activity
             android:name=".card.SavedCardSaleActivity"
             android:exported="false" />
-
         <activity
             android:name=".payment.PaymentRestoreActivity"
             android:exported="false" />
         <activity
             android:name=".card.CardSaleActivity"
             android:exported="false" />
-
         <activity
             android:name=".account.remove.AccountRemoveActivity"
             android:exported="false" />
-
         <activity
             android:name=".gpay.GPaySaleActivity"
             android:exported="false" />
-
         <activity
             android:name=".MainActivity"
             android:exported="true">

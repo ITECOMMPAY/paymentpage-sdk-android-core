@@ -49,7 +49,7 @@ class AcsPageFragment : Fragment() {
         webView.webViewClient = object : WebViewClient() {
             override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
                 super.onPageStarted(view, url, favicon)
-                if (url.equals(acsPage.acs?.termUrl)) {
+                if (url.equals(acsPage.returnUrl)) {
                     onRedirected?.invoke()
                 }
             }

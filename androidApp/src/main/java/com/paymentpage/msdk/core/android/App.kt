@@ -6,7 +6,7 @@ import com.paymentpage.msdk.core.MSDKCoreSessionConfig
 
 
 class App : Application() {
-    private val config = MSDKCoreSessionConfig.debug("sdk.ecommpay.com", "paymentpage.ecommpay.com")
+    private val config = MSDKCoreSessionConfig.release("sdk.ecommpay.com", "paymentpage.ecommpay.com")
     //for mocking requests
     //private val config = MSDKCoreSessionConfig.mockFullSuccessFlow()
 

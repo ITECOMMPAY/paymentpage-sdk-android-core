@@ -7,6 +7,12 @@ import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.paymentpage.msdk.core.android.account.remove.AccountRemoveActivity
+import com.paymentpage.msdk.core.android.aps.ApsActivity
+import com.paymentpage.msdk.core.android.card.CardSaleActivity
+import com.paymentpage.msdk.core.android.card.SavedCardSaleActivity
+import com.paymentpage.msdk.core.android.gpay.GPaySaleActivity
+import com.paymentpage.msdk.core.android.payment.PaymentRestoreActivity
 import com.paymentpage.msdk.core.base.ErrorCode
 import com.paymentpage.msdk.core.domain.entities.PaymentInfo
 import com.paymentpage.msdk.core.domain.entities.init.PaymentMethod
@@ -15,11 +21,6 @@ import com.paymentpage.msdk.core.domain.entities.payment.Payment
 import com.paymentpage.msdk.core.domain.interactors.init.InitDelegate
 import com.paymentpage.msdk.core.domain.interactors.init.InitInteractor
 import com.paymentpage.msdk.core.domain.interactors.init.InitRequest
-import com.paymentpage.msdk.core.android.account.remove.AccountRemoveActivity
-import com.paymentpage.msdk.core.android.card.CardSaleActivity
-import com.paymentpage.msdk.core.android.card.SavedCardSaleActivity
-import com.paymentpage.msdk.core.android.gpay.GPaySaleActivity
-import com.paymentpage.msdk.core.android.payment.PaymentRestoreActivity
 
 class MainActivity : AppCompatActivity(), InitDelegate {
 
@@ -39,8 +40,8 @@ class MainActivity : AppCompatActivity(), InitDelegate {
         val paymentInfo = PaymentInfo(
             projectId = BuildConfig.PROJECT_ID,
             paymentId = CommonUtils.getRandomPaymentId(),
-            paymentAmount = 1031,
-            paymentCurrency = "USD",
+            paymentAmount = 1001,
+            paymentCurrency = "RUB",
             //set customer id if needed
             customerId = "12",
             //set token if need create sale with token
@@ -62,6 +63,8 @@ class MainActivity : AppCompatActivity(), InitDelegate {
             ),
             this
         )
+
+
     }
 
     override fun onDestroy() {
@@ -94,7 +97,7 @@ class MainActivity : AppCompatActivity(), InitDelegate {
         findViewById<Button>(R.id.newCard).isEnabled = true
         findViewById<Button>(R.id.savedCard).isEnabled = true
         findViewById<Button>(R.id.removeSavedCard).isEnabled = true
-
+        findViewById<Button>(R.id.aps).isEnabled = true
     }
 
     //received already created payment from init
@@ -107,6 +110,7 @@ class MainActivity : AppCompatActivity(), InitDelegate {
         findViewById<Button>(R.id.newCard).isEnabled = false
         findViewById<Button>(R.id.savedCard).isEnabled = false
         findViewById<Button>(R.id.removeSavedCard).isEnabled = false
+        findViewById<Button>(R.id.aps).isEnabled = false
     }
 
     override fun onError(code: ErrorCode, message: String) {
@@ -132,11 +136,17 @@ class MainActivity : AppCompatActivity(), InitDelegate {
     fun gPaySale(view: View?) {
         finish()
         startActivity(Intent(this, GPaySaleActivity::class.java))
+
     }
 
     fun paymentRestore(view: View?) {
         finish()
         startActivity(Intent(this, PaymentRestoreActivity::class.java))
+    }
+
+    fun aps(view: View?) {
+        finish()
+        startActivity(Intent(this, ApsActivity::class.java))
     }
 
 }

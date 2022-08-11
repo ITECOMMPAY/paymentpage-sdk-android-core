@@ -7,20 +7,21 @@ import android.util.Log
 import android.widget.Toast
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.wallet.*
+import com.paymentpage.msdk.core.android.App
 import com.paymentpage.msdk.core.android.BuildConfig
+import com.paymentpage.msdk.core.android.PayBaseActivity
 import com.paymentpage.msdk.core.android.R
 import com.paymentpage.msdk.core.domain.interactors.pay.googlePay.GooglePayEnvironment
 import com.paymentpage.msdk.core.domain.interactors.pay.googlePay.GooglePaySaleRequest
 import com.paymentpage.msdk.core.googlePay.GooglePayHelper
-import com.paymentpage.msdk.core.android.App
-import com.paymentpage.msdk.core.android.PayBaseActivity
 import org.json.JSONObject
 import java.math.BigDecimal
 
 
 class GPaySaleActivity : PayBaseActivity() {
 
-    private val googlePayHelper = GooglePayHelper(BuildConfig.GPAY_MERCHANT_ID, "Example Merchant")
+    private val googlePayHelper =
+        GooglePayHelper(BuildConfig.GPAY_MERCHANT_ID, "Example Merchant")
     private lateinit var client: PaymentsClient
 
 
@@ -39,7 +40,7 @@ class GPaySaleActivity : PayBaseActivity() {
             this,
             Wallet.WalletOptions.Builder()
                 .setEnvironment(WalletConstants.ENVIRONMENT_TEST)//test
-                .setTheme(WalletConstants.THEME_LIGHT)
+               // .setTheme(WalletConstants.THEME_LIGHT)
                 .build()
         )
 
@@ -59,7 +60,7 @@ class GPaySaleActivity : PayBaseActivity() {
             val googleJson =
                 googlePayHelper.createPaymentDataRequest(
                     BigDecimal.valueOf(
-                        (App.getMsdkSession().getPaymentInfo()?.paymentAmount ?: 0) / 100
+                        (App.getMsdkSession().getPaymentInfo()?.paymentAmount ?: 0) / 100.0
                     ), App.getMsdkSession().getPaymentInfo()?.paymentCurrency ?: "USD"
                 ).toString()
             val gpayRequest = PaymentDataRequest.fromJson(googleJson)
