@@ -58,7 +58,6 @@ class MainActivity : AppCompatActivity(), InitDelegate {
         interactor.execute(
             InitRequest(
                 paymentInfo,
-                null,
                 null
             ),
             this

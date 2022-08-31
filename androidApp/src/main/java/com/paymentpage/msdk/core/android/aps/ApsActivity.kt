@@ -23,7 +23,7 @@ class ApsActivity : PayBaseActivity() {
         setContentView(R.layout.activity_aps)
 
         val apsMethod = App.getMsdkSession().getPaymentMethods()
-            ?.lastOrNull { it.type == PaymentMethodType.WEBMONEY_LIGHT }
+            ?.lastOrNull { it.code == "alipay" }
         val paymentUrl = apsMethod?.paymentUrl
 
         webView = findViewById(R.id.webView)
@@ -33,7 +33,7 @@ class ApsActivity : PayBaseActivity() {
                 super.onPageStarted(view, url, favicon)
                 if (url != paymentUrl && apsMethod != null) {
                     interactor.execute(
-                        ApsSaleRequest(apsMethod.type.value),
+                        ApsSaleRequest(apsMethod.code),
                         this@ApsActivity
                     )
                 }

@@ -40,12 +40,12 @@ android {
 }
 
 dependencies {
-    implementation("com.ecommpay:msdk-core-android:0.4.0")
+    implementation("com.ecommpay:msdk-core-android:0.4.5")
 
     implementation("androidx.startup:startup-runtime:1.1.1")
 
     implementation("com.google.android.material:material:1.6.1")
-    implementation("androidx.appcompat:appcompat:1.4.2")
+    implementation("androidx.appcompat:appcompat:1.5.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
     implementation("androidx.activity:activity-ktx:1.5.1")
