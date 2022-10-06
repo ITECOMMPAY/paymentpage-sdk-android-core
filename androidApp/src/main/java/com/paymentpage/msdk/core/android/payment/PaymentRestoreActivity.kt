@@ -18,7 +18,7 @@ class PaymentRestoreActivity : PayBaseActivity() {
         progressDialog.show()
 
         interactor.execute(
-            PaymentRestoreRequest(App.getMsdkSession().getCurrentPayment()?.method ?: ""), this
+            PaymentRestoreRequest(), this
         )
     }
 

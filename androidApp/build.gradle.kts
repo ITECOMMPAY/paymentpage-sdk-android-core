@@ -40,7 +40,7 @@ android {
 }
 
 dependencies {
-    implementation("com.ecommpay:msdk-core-android:0.4.5")
+    implementation("com.ecommpay:msdk-core-android:0.4.6")
 
     implementation("androidx.startup:startup-runtime:1.1.1")
 
