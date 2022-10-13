@@ -2,7 +2,6 @@ package com.paymentpage.msdk.core.android.payment
 
 import android.app.ProgressDialog
 import android.os.Bundle
-import com.paymentpage.msdk.core.android.App
 import com.paymentpage.msdk.core.android.PayBaseActivity
 import com.paymentpage.msdk.core.android.R
 import com.paymentpage.msdk.core.domain.interactors.pay.restore.PaymentRestoreRequest
@@ -17,9 +16,7 @@ class PaymentRestoreActivity : PayBaseActivity() {
         progressDialog.setCancelable(false)
         progressDialog.show()
 
-        interactor.execute(
-            PaymentRestoreRequest(), this
-        )
+        interactor.execute(PaymentRestoreRequest(), this)
     }
 
     override fun onDestroy() {

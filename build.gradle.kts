@@ -15,6 +15,7 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+        mavenLocal()
         maven(url = "https://maven.pkg.jetbrains.space/public/p/ktor/eap")
         maven("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/temporary")
     }

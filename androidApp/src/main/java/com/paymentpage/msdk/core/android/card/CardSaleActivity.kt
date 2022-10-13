@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.paymentpage.msdk.core.android.R
 import com.paymentpage.msdk.core.domain.interactors.pay.card.sale.NewCardSaleRequest
 import com.paymentpage.msdk.core.android.PayBaseActivity
+import com.paymentpage.msdk.core.domain.entities.CardDate
 
 
 class CardSaleActivity : PayBaseActivity() {
@@ -27,8 +28,7 @@ class CardSaleActivity : PayBaseActivity() {
             NewCardSaleRequest(
                 cvv = "123",
                 pan = "5555555555554444",
-                year = 2025,
-                month = 1,
+                expiryDate = CardDate(month = 1, year = 2025),
                 cardHolder = "MSDK CORE"
             ),
             this

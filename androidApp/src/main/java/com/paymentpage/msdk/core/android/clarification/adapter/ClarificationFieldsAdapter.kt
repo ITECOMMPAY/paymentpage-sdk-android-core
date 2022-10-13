@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.paymentpage.msdk.core.android.R
 import com.paymentpage.msdk.core.domain.entities.clarification.ClarificationField
 import com.paymentpage.msdk.core.domain.entities.clarification.ClarificationFieldValue
-import com.paymentpage.msdk.core.domain.entities.field.FieldType
 
 
 class ClarificationFieldsAdapter(private val clarificationFields: List<ClarificationField>) :

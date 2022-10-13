@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.paymentpage.msdk.core.android.account.remove.AccountRemoveActivity
 import com.paymentpage.msdk.core.android.aps.ApsActivity
 import com.paymentpage.msdk.core.android.card.CardSaleActivity
+import com.paymentpage.msdk.core.android.card.CardPayoutActivity
 import com.paymentpage.msdk.core.android.card.SavedCardSaleActivity
 import com.paymentpage.msdk.core.android.gpay.GPaySaleActivity
 import com.paymentpage.msdk.core.android.payment.PaymentRestoreActivity
@@ -40,8 +41,8 @@ class MainActivity : AppCompatActivity(), InitDelegate {
         val paymentInfo = PaymentInfo(
             projectId = BuildConfig.PROJECT_ID,
             paymentId = CommonUtils.getRandomPaymentId(),
-            paymentAmount = 1001,
-            paymentCurrency = "RUB",
+            paymentAmount = 7002,
+            paymentCurrency = "USD",
             //set customer id if needed
             customerId = "12",
             //set token if need create sale with token
@@ -97,6 +98,7 @@ class MainActivity : AppCompatActivity(), InitDelegate {
         findViewById<Button>(R.id.savedCard).isEnabled = true
         findViewById<Button>(R.id.removeSavedCard).isEnabled = true
         findViewById<Button>(R.id.aps).isEnabled = true
+        findViewById<Button>(R.id.cardPayout).isEnabled = true
     }
 
     //received already created payment from init
@@ -110,6 +112,7 @@ class MainActivity : AppCompatActivity(), InitDelegate {
         findViewById<Button>(R.id.savedCard).isEnabled = false
         findViewById<Button>(R.id.removeSavedCard).isEnabled = false
         findViewById<Button>(R.id.aps).isEnabled = false
+        findViewById<Button>(R.id.cardPayout).isEnabled = false
     }
 
     override fun onError(code: ErrorCode, message: String) {
@@ -146,6 +149,11 @@ class MainActivity : AppCompatActivity(), InitDelegate {
     fun aps(view: View?) {
         finish()
         startActivity(Intent(this, ApsActivity::class.java))
+    }
+
+    fun cardPayout(view: View?) {
+        finish()
+        startActivity(Intent(this, CardPayoutActivity::class.java))
     }
 
 }
