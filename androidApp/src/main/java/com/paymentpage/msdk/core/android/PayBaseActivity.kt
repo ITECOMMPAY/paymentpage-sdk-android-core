@@ -4,15 +4,16 @@ import android.app.ProgressDialog
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.paymentpage.msdk.core.android.acs.AcsPageFragment
 import com.paymentpage.msdk.core.android.clarification.ClarificationFieldsFragment
 import com.paymentpage.msdk.core.android.customer.CustomerFieldFragment
+import com.paymentpage.msdk.core.android.final.FinalPageFragment
+import com.paymentpage.msdk.core.android.threeDSecure.ThreeDSecurePageFragment
 import com.paymentpage.msdk.core.base.ErrorCode
 import com.paymentpage.msdk.core.domain.entities.clarification.ClarificationField
 import com.paymentpage.msdk.core.domain.entities.customer.CustomerField
 import com.paymentpage.msdk.core.domain.entities.payment.Payment
 import com.paymentpage.msdk.core.domain.entities.payment.PaymentStatus
-import com.paymentpage.msdk.core.domain.entities.threeDSecure.AcsPage
+import com.paymentpage.msdk.core.domain.entities.threeDSecure.ThreeDSecurePage
 import com.paymentpage.msdk.core.domain.interactors.pay.PayDelegate
 
 abstract class PayBaseActivity : AppCompatActivity(), PayDelegate {
@@ -41,16 +42,24 @@ abstract class PayBaseActivity : AppCompatActivity(), PayDelegate {
     }
 
     //received 3ds page and need open it in WebView
-    override fun onThreeDSecure(acsPage: AcsPage, isCascading: Boolean, payment: Payment) {
+    override fun onThreeDSecure(
+        threeDSecurePage: ThreeDSecurePage,
+        isCascading: Boolean,
+        payment: Payment
+    ) {
         progressDialog.dismiss()
 
-        val fragment = AcsPageFragment.newInstance(acsPage = acsPage, callback = {
-            interactor.threeDSecureHandled()
-            progressDialog.show()
-        })
+        val fragment = ThreeDSecurePageFragment.newInstance(
+            threeDSecurePage = threeDSecurePage,
+            callback = {
+                if (!it.isNullOrEmpty())
+                    interactor.threeDSecureRedirectHandle(it)
+
+            })
+
         supportFragmentManager
             .beginTransaction()
-            .add(R.id.container, fragment, "AcsPageFragment")
+            .replace(R.id.container, fragment, "ThreeDSecurePageFragment")
             .commit()
     }
 
@@ -65,6 +74,7 @@ abstract class PayBaseActivity : AppCompatActivity(), PayDelegate {
 
         progressDialog.dismiss()
         val fragment = CustomerFieldFragment.newInstance(callback = {
+            progressDialog.show()
             interactor.sendCustomerFields(it)
         })
         supportFragmentManager
@@ -109,17 +119,26 @@ abstract class PayBaseActivity : AppCompatActivity(), PayDelegate {
         progressDialog.dismiss()
         Toast.makeText(applicationContext, "Payment completed with success", Toast.LENGTH_SHORT)
             .show()
+        val fragment = FinalPageFragment.newInstance(paymentJson = payment.json ?: "")
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.container, fragment, "FinalPageFragment")
+            .commit()
     }
 
-    override fun onCompleteWithFail(isTryAgain: Boolean, paymentMessage: String?, payment: Payment) {
-        progressDialog.dismiss()
-        Toast.makeText(applicationContext, "Payment completed with error", Toast.LENGTH_SHORT)
-            .show()
-    }
 
-    override fun onCompleteWithDecline(paymentMessage: String?, payment: Payment) {
+    override fun onCompleteWithDecline(
+        isTryAgain: Boolean,
+        paymentMessage: String?,
+        payment: Payment
+    ) {
         progressDialog.dismiss()
         Toast.makeText(applicationContext, "Payment was declined", Toast.LENGTH_SHORT).show()
+        val fragment = FinalPageFragment.newInstance(paymentJson = payment.json ?: "")
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.container, fragment, "FinalPageFragment")
+            .commit()
     }
 
     override fun onError(code: ErrorCode, message: String) {

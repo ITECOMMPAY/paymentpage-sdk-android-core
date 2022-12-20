@@ -10,7 +10,6 @@ import android.webkit.WebViewClient
 import com.paymentpage.msdk.core.android.App
 import com.paymentpage.msdk.core.android.PayBaseActivity
 import com.paymentpage.msdk.core.android.R
-import com.paymentpage.msdk.core.domain.entities.init.PaymentMethodType
 import com.paymentpage.msdk.core.domain.entities.payment.Payment
 import com.paymentpage.msdk.core.domain.interactors.pay.aps.ApsSaleRequest
 
@@ -37,7 +36,6 @@ class ApsActivity : PayBaseActivity() {
                         this@ApsActivity
                     )
                 }
-
             }
 
             override fun onPageFinished(view: WebView, url: String) {
@@ -62,20 +60,15 @@ class ApsActivity : PayBaseActivity() {
         }
     }
 
-    override fun onCompleteWithDecline(paymentMessage: String?, payment: Payment) {
-        super.onCompleteWithDecline(paymentMessage, payment)
-        webView.visibility = GONE
-    }
-
-    override fun onCompleteWithFail(
+    override fun onCompleteWithDecline(
         isTryAgain: Boolean,
         paymentMessage: String?,
         payment: Payment
     ) {
-        super.onCompleteWithFail(isTryAgain, paymentMessage, payment)
-
+        super.onCompleteWithDecline(isTryAgain, paymentMessage, payment)
         webView.visibility = GONE
     }
+
 
     override fun onCompleteWithSuccess(payment: Payment) {
         super.onCompleteWithSuccess(payment)

@@ -1,5 +1,6 @@
-package com.paymentpage.msdk.core.android.acs
+package com.paymentpage.msdk.core.android.threeDSecure
 
+import android.app.ProgressDialog
 import android.graphics.Bitmap
 import android.net.http.SslError
 import android.os.Bundle
@@ -12,30 +13,49 @@ import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import com.google.gson.Gson
 import com.paymentpage.msdk.core.android.R
-import com.paymentpage.msdk.core.domain.entities.threeDSecure.AcsPage
+import com.paymentpage.msdk.core.domain.entities.threeDSecure.ThreeDSecurePage
+import com.paymentpage.msdk.core.domain.entities.threeDSecure.ThreeDSecurePageType
 
 
-private const val ARG_ACS_PAGE = "acs_page"
+private const val ARG_THREE_D_SECURE_PAGE = "3d_secure_page"
 
-class AcsPageFragment : Fragment() {
-    private lateinit var acsPage: AcsPage
+class ThreeDSecurePageFragment : Fragment() {
+
+    private lateinit var threeDSecurePage: ThreeDSecurePage
     private val gson = Gson()
-    private var onRedirected: (() -> Unit)? = null
+    private var onRedirected: ((String?) -> Unit)? = null
+
+    lateinit var progressDialog: ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        progressDialog = ProgressDialog(requireContext())
+        progressDialog.setMessage("Loading")
+        progressDialog.setCancelable(false)
+
         arguments?.let {
-            val json = it.getString(ARG_ACS_PAGE)
-            acsPage = gson.fromJson(json, AcsPage::class.java)
+            val json = it.getString(ARG_THREE_D_SECURE_PAGE)
+            threeDSecurePage = gson.fromJson(json, ThreeDSecurePage::class.java)
         }
+
+        if (threeDSecurePage.type == ThreeDSecurePageType.THREE_DS_2_FRICTIONLESS) {
+            progressDialog.show()
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        progressDialog.dismiss()
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_acs_page, container, false)
+        return inflater.inflate(R.layout.fragment_3ds_page, container, false)
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -46,12 +66,11 @@ class AcsPageFragment : Fragment() {
         webView.settings.builtInZoomControls = true
         webView.settings.domStorageEnabled = true
 
+
         webView.webViewClient = object : WebViewClient() {
             override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
                 super.onPageStarted(view, url, favicon)
-                if (url.equals(acsPage.returnUrl)) {
-                    onRedirected?.invoke()
-                }
+                onRedirected?.invoke(url)
             }
 
             override fun onPageFinished(view: WebView, url: String) {
@@ -68,21 +87,22 @@ class AcsPageFragment : Fragment() {
         }
 
         webView.loadDataWithBaseURL(
-            acsPage.acs?.acsUrl,
-            acsPage.content ?: "",
+            threeDSecurePage.loadUrl,
+            threeDSecurePage.content ?: "",
             "text/html",
             "utf-8",
             null
         )
+
     }
 
     companion object {
         @JvmStatic
-        fun newInstance(acsPage: AcsPage, callback: (() -> Unit)) =
-            AcsPageFragment().apply {
+        fun newInstance(threeDSecurePage: ThreeDSecurePage, callback: ((String?) -> Unit)) =
+            ThreeDSecurePageFragment().apply {
                 onRedirected = callback
                 arguments = Bundle().apply {
-                    putString(ARG_ACS_PAGE, gson.toJson(acsPage))
+                    putString(ARG_THREE_D_SECURE_PAGE, gson.toJson(threeDSecurePage))
                 }
             }
     }
