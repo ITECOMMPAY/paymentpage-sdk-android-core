@@ -47,4 +47,8 @@ class AccountRemoveActivity : AppCompatActivity(), CardRemoveDelegate {
         progressDialog.dismiss()
         Toast.makeText(applicationContext, code.exceptionName ?: message, Toast.LENGTH_LONG).show()
     }
+
+    override fun onStartingRemove() {
+
+    }
 }

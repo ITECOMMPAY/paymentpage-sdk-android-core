@@ -58,8 +58,9 @@ class MainActivity : AppCompatActivity(), InitDelegate {
         //payment init
         interactor.execute(
             InitRequest(
-                paymentInfo,
-                null
+                paymentInfo = paymentInfo,
+                recurrentInfo = null,
+                additionalFields = emptyList() //you can set there your custom fields
             ),
             this
         )
