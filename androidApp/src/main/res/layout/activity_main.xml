@@ -40,14 +40,6 @@
         android:text="Saved Card Sale/Auth" />
 
     <Button
-        android:id="@+id/cardPayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:enabled="false"
-        android:onClick="cardPayout"
-        android:text="Card Payout" />
-
-    <Button
         android:id="@+id/gPaySale"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
